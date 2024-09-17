@@ -1,0 +1,4 @@
+model:
+  config: "sam2_hiera_l.yaml"
+  checkpoints: "/mnt/ssd_990/teng/BinPicking/segment-anything-2/checkpoints/sam2_hiera_large.pt"
+
