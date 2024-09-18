@@ -273,6 +273,7 @@ class ObjectRemovalApp:
         self.frames_list = sorted([os.path.join(self.frames_folder, f) for f in os.listdir(self.frames_folder)
                                    if f.endswith(('.png', '.jpg', '.jpeg'))])
         self.total_frames = len(self.frames_list)
+        self.progress_slider.config(to=self.total_frames-1)
         for file in os.listdir(self.frames_folder):
             if file.endswith(".jpg") or file.endswith(".png"):
                 frame = cv2.imread(os.path.join(self.frames_folder, file))
@@ -453,6 +454,7 @@ class ObjectRemovalApp:
             # Load the first frame for display
             if frame_count > 0:
                 self.total_frames = frame_count
+                self.progress_slider.config(to=self.total_frames-1)
                 self.frames_list = sorted([os.path.join(self.frames_folder, f) for f in os.listdir(self.frames_folder)
                                    if f.endswith(('.png', '.jpg', '.jpeg'))])
                 first_frame=0
