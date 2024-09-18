@@ -37,6 +37,7 @@ You can load a video or a folder containing all the frame images of the video. U
 ## Example
 
 ### Background removements
-![color_demo](./pics/color_demo.gif)
+[![Watch the video](https://img.youtube.com/vi/M9dIifmYxIE/0.jpg)](https://youtu.be/M9dIifmYxIE)
+
 
 
