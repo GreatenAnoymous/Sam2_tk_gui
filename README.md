@@ -39,11 +39,13 @@ You can load a video or a folder containing all the frame images of the video. U
 
 ## Example
 
-### Background removements
-<video src="https://github.com/GreatenAnoymous/Sam2_tk_gui/tree/main/assets/color_demo.mp4"></video>
+### Background Removements
+<video src= "https://github.com/user-attachments/assets/15616366-8f76-4168-bea1-9f4e5193a88f"></video>
 
-### Object removements using LAMA
-<video src="https://github.com/GreatenAnoymous/Sam2_tk_gui/tree/main/assets/lama_demo.mp4"></video>
+
+
+### Object Removements using LAMA
+<video src="https://github.com/user-attachments/assets/0dfc39e9-62cd-43fe-a638-a11f5d24cdab"></video>
 
 ## Reference
 1. Segment-Anything 2: [https://github.com/facebookresearch/segment-anything-2](https://github.com/facebookresearch/segment-anything-2)
