@@ -8,7 +8,7 @@ The **SAM2 TKinter Gui** is a Python-based application designed for video proces
 
 - **Video Playback Controls**: Play, pause, and stop video playback with a progress slider.
 - **Frame Annotation**: Add positive or negative prompts to frames by clicking on the image.
-- **Object Removal**: Remove objects from videos using color-based, lama, or stble-diffusion-based inpainting.
+- **Object Removal**: Remove objects from videos using color-based, lama, or stable-diffusion-based inpainting.
 - **Mask Management**: Save segmentation masks.
 - **Video Saving**: Save the processed video with inpainted frames.
 - **Configuration**: Customize inpainting settings through the GUI.
