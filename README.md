@@ -33,7 +33,7 @@ Modify config.yaml and change the checkpoint path, then run
 ```shell
 python tkapp.py
 ```
-You can load a video or a folder containing all the frame images of the video. Use left-click to add a positive point prompt and right-click to add a negative prompt. Run "Process" so that SAM2 can generate the masks for the chosen object. Use either color inpainting or diffusion inpainting to inpaint the video.
+You can load a video or a folder containing all the frame images of the video. Use left-click to add a positive point prompt and right-click to add a negative prompt. Run "Process" so that SAM2 can generate the masks for the chosen object. Use either color inpainting, LAMA, or stable-diffusion inpainting to inpaint the video.
 
 
 ## Example
