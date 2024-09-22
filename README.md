@@ -1,4 +1,4 @@
-# SAM2 TKinter Gui
+# Simple SAM2 TKinter GUI
 
 ## Overview
 
