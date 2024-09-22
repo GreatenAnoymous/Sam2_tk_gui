@@ -12,7 +12,8 @@ from tkinter import ttk
 import tkinter.colorchooser as colorchooser
 import sys
 import threading
-
+from simple_lama_inpainting import SimpleLama
+from tqdm import tqdm
 
 # from diffusers import StableDiffusionInpaintPipeline
 from diffusers import DiffusionPipeline
@@ -32,7 +33,7 @@ class ObjectRemovalApp:
         # Customize the slider with a colored track (the 'Horizontal.TScale' is the default theme for horizontal scale)
         self.style.configure("TScale", troughcolor="gray", sliderthickness=20)
         self.root = root
-        self.root.title("Object Removal App")
+        self.root.title("SAM2 TKinter ")
         self.frames_folder = "./frames/"
         self.video_segments={}
         self.INPAINTING_MODE = "colors"
@@ -74,6 +75,7 @@ class ObjectRemovalApp:
         file_menu.add_command(label="Open a Folder", command=self.open_folder)
         file_menu.add_command(label="Save Masks", command=self.save_masks)
         file_menu.add_command(label="Save Video", command=self.save_video)
+        
         file_menu.add_separator()
 
         file_menu.add_command(label="Exit", command=root.quit)
@@ -86,12 +88,17 @@ class ObjectRemovalApp:
         inpainting_menu = tk.Menu(tools_menu, tearoff=0)
         inpainting_menu.add_command(label="Colors", command=self.open_color_settings)
         inpainting_menu.add_command(label="Diffusion", command=self.open_diffusion_settings)
+        inpainting_menu.add_command(label="LAMA", command=self.lama_inpainting)
         tools_menu.add_command(label="Process", command=self.process_video)
         tools_menu.add_cascade(label="Inpaint", menu=inpainting_menu)
         tools_menu.add_command(label="Reset", command=self.reset)
         
         # Add "Tools" menu to the menubar
         self.menubar.add_cascade(label="Tools", menu=tools_menu)
+
+        checkpoints_menu = tk.Menu(tools_menu, tearoff=0)
+        checkpoints_menu.add_command(label="SAM2", command=None)
+        checkpoints_menu.add_command(label="LAMA", command=None)
 
         # Add "Edit" menu to the menubar
         
@@ -155,6 +162,49 @@ class ObjectRemovalApp:
 
     def about(self):
         messagebox.showinfo("About", "This is a simple object removal app using the SAM model.")
+
+
+    def lama_inpainting(self):
+        self.processed_frames = []
+        simple_lama = SimpleLama()
+        
+        # Create a progress bar, iterating over video segments with tqdm
+        for frame_idx, masks in tqdm(self.video_segments.items(), desc="Inpainting frames", unit="frame"):
+            frame_image = Image.open(self.frames_list[frame_idx])
+            width, height = frame_image.size
+            mask_image = np.zeros((height, width), dtype=np.uint8)
+            
+            # Create the mask for the current frame
+            for obj_id, mask in masks.items():
+                mask_image[mask] = 1
+                
+            mask_image = Image.fromarray((mask_image * 255).astype(np.uint8))
+            
+            # Convert the mask to a NumPy array for dilation
+            mask_np = np.array(mask_image)
+
+            # Define the kernel for dilation
+            kernel = np.ones((40, 40), np.uint8)  # Adjust the kernel size as needed
+            dilated_mask_np = cv2.dilate(mask_np, kernel, iterations=1)
+
+            # Convert the dilated mask back to a PIL image
+            dilated_mask = Image.fromarray(dilated_mask_np)
+            
+            # Perform inpainting
+            generated_image = simple_lama(frame_image, dilated_mask)
+            generated_image = np.array(generated_image)
+            
+            # Append the processed frame
+            self.processed_frames.append(generated_image)
+
+        # Show success message after completion
+        messagebox.showinfo("Success", "Video inpainted successfully")
+            
+            
+                
+
+            
+        
     
     def open_color_settings(self):
         """
@@ -238,7 +288,8 @@ class ObjectRemovalApp:
             generator = torch.Generator(device="cuda").manual_seed(0) # change the seed to get different results
             
             # mask_image.save("mask_image.png")
-            # cv2.imwrite("frame_image.png", cv2.cvtColor(frame_image, cv2.COLOR_RGB2BGR))
+            # frame_image_arr= np.array(frame_image)
+            # cv2.imwrite("frame_image.png", cv2.cvtColor(frame_image_arr, cv2.COLOR_RGB2BGR))
             # Inpaint the frame
             inpainted_image = pipe(
                 prompt=prompt,

@@ -24,6 +24,8 @@ The **SAM2 TKinter Gui** is a Python-based application designed for video proces
   - `torch`
   - `PIL` (Pillow)
   - `diffusers`
+  - `tqdm`
+  - `simple-lama`
   - `sam2` (custom library for Segment-Anything 2 model)
   
 ## Usage
@@ -39,4 +41,11 @@ You can load a video or a folder containing all the frame images of the video. U
 ### Background removements
 ![color_demo](./pics/color_demo.gif)
 
+### Object removements using LAMA
+![lama_demo](./pics/lama_demo.gif)
+
+## Reference
+1. Segment-Anything 2: [https://github.com/facebookresearch/segment-anything-2](https://github.com/facebookresearch/segment-anything-2)
+2. LAMA: [https://github.com/advimman/lama](https://github.com/advimman/lama)
+3. Simple-LAMA-inpainting: [https://github.com/enesmsahin/simple-lama-inpainting](https://github.com/enesmsahin/simple-lama-inpainting) 
 
