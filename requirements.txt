@@ -1,0 +1,8 @@
+torch
+torchvision
+numpy
+yaml
+simple_lama_inpainting
+pillow
+diffusers
+tqdm
