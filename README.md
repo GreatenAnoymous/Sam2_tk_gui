@@ -25,8 +25,8 @@ The **SAM2 TKinter Gui** is a Python-based application designed for video proces
   - `PIL` (Pillow)
   - `diffusers`
   - `tqdm`
-  - `Segment-Anything 2 [1]`
-  - `Simple-Lama-Inpainting [3]` 
+  - `Segment-Anything 2`
+  - `Simple-Lama-Inpainting` 
  
   
 ## Usage
